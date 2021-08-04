@@ -13,9 +13,45 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
+from django.views.i18n import JavaScriptCatalog
+from django.views.decorators.http import last_modified
+from django.conf.urls.i18n import i18n_patterns
+from django.utils import timezone
+
+
+# import Http Response from django
+from django.http import HttpResponse
+# get datetime
+import datetime
+
+admin.autodiscover()
+
+
+def hello(request):
+    # fetch date and time
+    now = datetime.datetime.now()
+    # convert to string
+    html = f"Time is {now}"
+    # return response
+    return HttpResponse(html)
+
 
 urlpatterns = [
+    path('', hello),
     path('admin/', admin.site.urls),
 ]
+
+js_info_dict = {
+    'domain': 'django',
+    'packages': getattr(settings, 'PROJECT_APPS'),
+}
+
+last_modified_date = timezone.now()
+urlpatterns += i18n_patterns(
+    path('jsi18n/', last_modified(lambda req, **kw: last_modified_date)(JavaScriptCatalog.as_view(**js_info_dict)),
+         name='javascript-catalog')
+)
