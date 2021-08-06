@@ -15,9 +15,9 @@ base_settings = [
     'components/caches.py',
     'components/middleware.py',
     'components/templates.py',
-    'components/templates.py',
     'components/locale.py',
     'components/security.py',
+    'components/static.py',
 
     # Select the right env:
     'environments/{0}.py'.format(ENV),

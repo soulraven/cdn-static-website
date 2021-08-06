@@ -1,0 +1,29 @@
+{% extends "../html_skeleton.html" %}
+{#{% load static gtm_tags %}#}
+{% block html_class %}no-js{% endblock %}
+{% block begin_head %}{#    {% gtm_head %}#}{% endblock %}
+{% block base_head %}
+    <meta charset="utf-8">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{{ config.SITE_DESCRIPTION }}-{% endblock %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" value="notranslate" content="notranslate">
+    <link rel="dns-prefetch" href="{{ request.build_absolute_uri }}">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    <base href="{{ request.build_absolute_uri|slice:":-1" }}">
+    <meta name="theme-color" content="#317EFB"/>
+    {% block blockbots %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+    {% include "./parts/html_head_icons_meta.html" %}
+    <title>{% block title %}{% endblock %} | {{ site_title|default:_('projectName_title') }}</title>
+    {% include "./parts/html_head_css.html" %}
+    {% block extrastyle %}{% endblock %}
+{% endblock %}
+{% block begin_body %}{#    {% gtm_body %}#}{% endblock %}
+{% block extrascript %}
+    {% include "./parts/html_body_js.html" %}
+{% endblock %}

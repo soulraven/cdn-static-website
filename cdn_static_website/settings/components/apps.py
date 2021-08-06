@@ -20,7 +20,9 @@ PREREQ_APPS: Tuple[str, ...] = (
     'django_extensions',
 )
 
-PROJECT_APPS: Tuple[str, ...] = ()
+PROJECT_APPS: Tuple[str, ...] = (
+    'pages',
+)
 
 # Application definition
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS

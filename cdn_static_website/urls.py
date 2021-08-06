@@ -16,12 +16,13 @@ Including another URLconf
 
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.i18n import JavaScriptCatalog
 from django.views.decorators.http import last_modified
 from django.conf.urls.i18n import i18n_patterns
 from django.utils import timezone
 
+from pages import views
 
 # import Http Response from django
 from django.http import HttpResponse
@@ -41,7 +42,7 @@ def hello(request):
 
 
 urlpatterns = [
-    path('', hello),
+    path('', include('pages.urls', namespace='pages')),
     path('admin/', admin.site.urls),
 ]
 

@@ -15,6 +15,19 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.contrib import admin
+from django.urls import path, include
+from django.views.decorators.http import last_modified
+from django.utils import timezone
 
-# Register your models here.
+from .views import IndexView, AboutView
+from utils.view import JavaScriptSettings
+
+last_modified_date = timezone.now()
+
+app_name = 'pages'
+urlpatterns = [
+    path('', IndexView.as_view(), name='index-page'),
+    path('about', AboutView.as_view(), name='about-page'),
+    path('js_settings/', last_modified(lambda req, **kw: last_modified_date)(JavaScriptSettings.as_view()),
+         name='javascript-settings')
+]
